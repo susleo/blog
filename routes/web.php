@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/home',function () {
+//    return view('admin.index');
+//});
+
+Route::resource('categories','CategoriesController');
+
+Route::resource('post','PostController');
