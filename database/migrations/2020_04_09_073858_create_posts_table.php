@@ -17,7 +17,9 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->text('content');
+            $table->string('image');
+            $table->text('contents');
+            $table->integer('category_id');
             $table->timestamp('published_at');
             $table->softDeletes();
             $table->timestamps();

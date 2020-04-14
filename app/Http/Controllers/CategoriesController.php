@@ -95,14 +95,30 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         //
-        $category = Category::find($id);
+        $category = Category::withTrashed()->where('id',$id)->first();
+        if($category->trashed()){
+           $category->forceDelete();
+        }
         $catName = $category->name;
         $category->delete();
 
         session()->flash('success','Category '.$catName.' Deleted SucessFully');
         return redirect(route('categories.index'));
-
-
-
     }
+
+    public function trashed(){
+        $category = Category::onlyTrashed()->get();
+        return view('admin.categories.index')->with('categories',$category);
+    }
+
+    public function restore($id){
+        $category = Category::onlyTrashed()->where('id',$id)->first();
+        $category->restore();
+        session()->flash('success','Category Restored SuccesFull');
+        return redirect(route('categories.index'));
+    }
+
+
+
+
 }

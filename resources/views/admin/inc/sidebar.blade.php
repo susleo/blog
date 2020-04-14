@@ -25,20 +25,31 @@
             <div class="sidebar-accordion-menu">
                 <ul class="sidebar-menu list-unstyled">
                     <li>
-                        <a href="index.html" class="waves-effect waves-grey">
+                        <a href="{{route('home')}}" class="waves-effect waves-grey">
                             <i class="material-icons">settings_input_svideo</i>Dashboard
                         </a>
                     </li>
 
+
                     <li>
-                        <a href="forms.html" class="waves-effect waves-grey">
-                            <i class="material-icons">mode_edit</i>Post
+                        <a href="{{route('post.index')}}" class="waves-effect waves-grey">
+                            <i class="material-icons">create</i>Post<i class="material-icons sub-arrow">keyboard_arrow_right</i>
                         </a>
+                        <ul class="accordion-submenu list-unstyled">
+                            <li><a href="{{route('post.index')}}"> All Posts</a></li>
+                            <li><a href="{{route('post.create')}}"> Create New Post</a></li>
+                            <li><a href="{{route('post.trashed')}}">Trash</a></li>
+                        </ul>
                     </li>
+
                     <li>
                         <a href="{{route('categories.index')}}" class="waves-effect waves-grey">
                             <i class="material-icons">grid_on</i>Categories
                         </a>
+                        <ul class="accordion-submenu list-unstyled">
+                            <li><a href="{{route('categories.index')}}"> All Categories</a></li>
+                            <li><a href="{{route('categories.trashed')}}">Trash</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="charts.html" class="waves-effect waves-grey">

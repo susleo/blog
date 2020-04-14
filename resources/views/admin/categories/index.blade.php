@@ -18,13 +18,13 @@
                                 @method('DELETE')
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Are You Sure Want To Delete ?</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">DELETING CATEGORIES</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Woohoo, you're reading this text in a modal!
+                                  Are You Sure Want to Delete this ?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-text-secondary" data-dismiss="modal">Close</button>
@@ -34,6 +34,7 @@
                             </form>
                         </div>
                     </div>
+
 
                     <form action="{{isset($category)?route('categories.update',$category->id):route('categories.store')}}" method="post">
                         @csrf
@@ -48,6 +49,10 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 
+
+
+                    @if($categories->count() > 0)
+
                     @if(!isset($category))
                     <table class="table">
                         <thead>
@@ -55,6 +60,7 @@
 
                             <th scope="col">#</th>
                             <th scope="col">Categories</th>
+                            <th scope="col">Posts</th>
                             <th></th>
 
                         </tr>
@@ -66,19 +72,21 @@
                         <tr>
                             <th scope="row">{{$i}}</th>
                             <td>{{$cat->name}}</td>
+                            <td><h3><span class="badge badge-primary">{{$cat->posts->count()}}</span></h3></td>
+
                             <td>
+                                @if(!$cat->trashed())
                                 <a href="{{route('categories.edit',$cat->id)}}">
                                     <button type="button" class="btn btn-warning rounded-pill">Edit</button>
                                 </a>
-
-                            <td>
-                            <td>
+                                @else
+                                    <a href="{{route('categories.restore',$cat->id)}}">
+                                        <button type="button" class="btn btn-warning rounded-pill">Restore</button>
+                                    </a>
+                                @endif
                                 <button type="button" class="btn btn-danger rounded-pill"  onclick="handleDelete({{$cat->id}})">Delete</button>
-
                             <td>
-
                                @php $i++ @endphp
-
 
                         </tr>
                         @endforeach
@@ -86,6 +94,11 @@
 
                         </tbody>
                     </table>
+                    @endif
+
+
+                    @else
+                        <h3> <br>No Categories Yet !!</h3>
                     @endif
                 </div>
             </div><!-- Page Content -->

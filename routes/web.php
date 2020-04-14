@@ -26,5 +26,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //});
 
 Route::resource('categories','CategoriesController');
+Route::get('trashed-categories','CategoriesController@trashed')->name('categories.trashed');
+Route::get('restore-categories/{categories}','CategoriesController@restore')->name('categories.restore');
 
 Route::resource('post','PostController');
+Route::get('trashed-post','PostController@trashed')->name('post.trashed');
+Route::get('restore-post/{post}','PostController@restore')->name('post.restore');
