@@ -41,7 +41,13 @@
             <div class="alert alert-primary" role="alert">
                 {{session()->get('success')}}
             </div>
-        @endif
+            @endif
+
+            @if(session()->has('error'))
+            <div class="alert alert-danger" role="alert" style="color: white">
+                {{session()->get('error')}}
+            </div>
+           @endif
 
         @if($errors->any())
                 <div class="alert alert-danger" role="alert">

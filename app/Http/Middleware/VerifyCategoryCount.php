@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Category;
 use Closure;
 
 class VerifyCategoryCount
@@ -15,6 +16,14 @@ class VerifyCategoryCount
      */
     public function handle($request, Closure $next)
     {
+        if(Category::all()->count() == 0){
+
+            session()->flash('error','Create Some Categpory Before Post');
+
+            return redirect()->back();
+        }
+
+
         return $next($request);
     }
 }

@@ -51,6 +51,12 @@
                             <li><a href="{{route('categories.trashed')}}">Trash</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="{{route('tags.index')}}" class="waves-effect waves-grey">
+                            <i class="material-icons">tags</i>Tags
+                        </a>
+                    </li>
                     <li>
                         <a href="charts.html" class="waves-effect waves-grey">
                             <i class="material-icons">trending_up</i>Charts

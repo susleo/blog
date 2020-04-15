@@ -24,4 +24,8 @@ class Post extends Model
     public function deleteImage(){
         return Storage::delete($this->image);
     }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
 }

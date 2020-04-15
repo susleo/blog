@@ -96,11 +96,18 @@ class CategoriesController extends Controller
     {
         //
         $category = Category::withTrashed()->where('id',$id)->first();
+
         if($category->trashed()){
            $category->forceDelete();
+        }else{
+            if($category->posts->count()>0) {
+                session()->flash('error', 'Categories is Associated With Some Post.Eror');
+                return redirect()->back();
+            }
+            $catName = $category->name;
+            $category->delete();
         }
-        $catName = $category->name;
-        $category->delete();
+
 
         session()->flash('success','Category '.$catName.' Deleted SucessFully');
         return redirect(route('categories.index'));

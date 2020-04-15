@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Post;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -13,7 +14,16 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     *
      */
+
+
+    public function __construct()
+    {
+        $this->middleware('verifyCategoryCount')->only(['create','store']);
+    }
+
     public function index()
     {
         //
@@ -29,7 +39,10 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.create')->with('categories',$categories);
+
+        return view('admin.posts.create')
+            ->with('categories',$categories)
+            ->with('tags',Tag::all());
     }
 
     /**
@@ -53,27 +66,14 @@ class PostController extends Controller
            'category_id'=>$request->category_id,
            'image'=>$image,
            'published_at'=>$request->published_at,
-
        ];
 
-       Post::create($data);
+       $post = Post::create($data);
+       $post->tags()->attach($request->tags);
+
        session()->flash('success','Post Created Success');
        return redirect(route('post.index'));
 
-
-
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -84,10 +84,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
         //
         $categories = Category::all();
         return view('admin.posts.create')
             ->with('categories',$categories)
+            ->with('tags',Tag::all())
              ->with('post',$post);
 
     }
@@ -125,6 +127,7 @@ class PostController extends Controller
         //update other attributes
 
         $post->update($data);
+        $post->tags()->sync($request->tags);
          //flash and redirect
         session()->flash('success','Post Updated SucessFully');
         return redirect(route('post.index'));

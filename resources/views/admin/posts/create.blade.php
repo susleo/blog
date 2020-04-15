@@ -3,10 +3,13 @@
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css" class="rel">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    @endsection
+    <link href="{{asset('assets/plugins/select2/css/select2-material.css')}}" rel="stylesheet">
+@endsection
 
 @section('content')
-
+{{--    {{dd($post->tags())}}--}}
+{{--{{dd($post->tags->toArray())}}--}}
+{{--{{dd($post->tags->pluck('id')->toArray())}}--}}
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
@@ -65,6 +68,24 @@
                                 <input type="file" class="form-control" id="image" name="image">
                             </div>
 
+
+                            <label for="Category">Tags</label>
+                            <div class="form-group">
+                               <select class="js-states form-control custom-select" id="tags" name="tags[]" multiple="multiple">
+                                    @foreach($tags as $t)
+                                        <option value="{{$t->id}}"
+                                                @if(isset($post))
+                                                    @if(in_array($t->id,$post->tags->pluck('id')->toArray()))
+                                                        selected
+                                                        @endif
+                                                @endif
+                                        >{{$t->name}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="published_at">Published At</label>
                                 <input type="text" class="form-control" id="published_at" name="published_at" value="{{isset($post)?$post->published_at:''}}">
@@ -87,4 +108,13 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix-core.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
+    <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#tags').select2();
+
+        });
+    </script>
     @endsection

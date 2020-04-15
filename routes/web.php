@@ -32,3 +32,6 @@ Route::get('restore-categories/{categories}','CategoriesController@restore')->na
 Route::resource('post','PostController');
 Route::get('trashed-post','PostController@trashed')->name('post.trashed');
 Route::get('restore-post/{post}','PostController@restore')->name('post.restore');
+
+Route::resource('tags','TagsController');
+
