@@ -12,10 +12,16 @@ class WelcomeController extends Controller
 {
     //
     public function index(){
-        $posts= Post::paginate(6);
-        $popular_post= Post::get()->sortByDesc('view_count');
-        $RandomPost1 = Post::where('deleted_at',null)->inRandomOrder()->take(6)->get();
 
+        if(\request()->query('search')){
+            $search = request()->query('search');
+            $RandomPost1 =Post::where('title','LIKE',"%{$search}%")->paginate(6);
+        }else{
+            $RandomPost1 = Post::where('deleted_at',null)->inRandomOrder()->take(6)->get();
+        }
+
+
+        $posts= Post::paginate(6);
         $categories = Category::all();
         $tags = Tag::all();
          return view('welcome',compact('posts','categories','tags','RandomPost1'));

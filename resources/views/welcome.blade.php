@@ -54,7 +54,11 @@
                            @foreach($categories as $cat)
                                 <li><a href="">{{ucfirst($cat->name)}}</a></li>
                                @endforeach
-                            <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search"></span></a></li>
+                            <li class="d-none d-lg-inline-block">
+                                <form action="{{route('welcome')}}" method="get">
+                                <input type="text" class="form-control" name="search" placeholder="Search this website" value="{{request()->query('search')}}">
+                                </form>
+                            </li>
                         </ul>
                     </nav>
                     <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a></div>
@@ -74,7 +78,7 @@
 {{--            </div>--}}
             <div class="row align-items-stretch retro-layout-2">
 
-                @foreach($RandomPost1 as $post)
+                @forelse($RandomPost1 as $post)
                     <div class="col-md-4">
                         <a href="{{route('post.show',$post->id)}}" class="h-entry mb-30 v-height gradient"
                            style="background-image: url({{asset('storage/'.$post->image)}});">
@@ -89,7 +93,11 @@
                             </div>
                         </a>
                     </div>
-                @endforeach
+                @empty
+
+                    <h3>No Post Found As Per The Search</h3>
+
+                @endforelse
 
             </div>
         </div>
@@ -125,13 +133,15 @@
                         </div>
                     </div>
                 </div>
+
+
                 @endforeach
             </div>
 
             <div class="row text-center pt-5 border-top">
                 <div class="col-md-12">
                     <div class="custom-pagination">
-                        {{$posts->links()}}
+                        {{$posts->appends(['search'=>request()->query('search')])->links()}}
                     </div>
                 </div>
             </div>
