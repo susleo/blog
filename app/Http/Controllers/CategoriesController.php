@@ -104,13 +104,11 @@ class CategoriesController extends Controller
                 session()->flash('error', 'Categories is Associated With Some Post.Eror');
                 return redirect()->back();
             }
-            $catName = $category->name;
             $category->delete();
         }
 
-
-        session()->flash('success','Category '.$catName.' Deleted SucessFully');
-        return redirect(route('categories.index'));
+        session()->flash('success','Category  Deleted SucessFully');
+        return redirect()->back();
     }
 
     public function trashed(){

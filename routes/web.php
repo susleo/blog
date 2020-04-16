@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index')->name('welcome');
 
 Auth::routes();
 
@@ -34,4 +32,13 @@ Route::get('trashed-post','PostController@trashed')->name('post.trashed');
 Route::get('restore-post/{post}','PostController@restore')->name('post.restore');
 
 Route::resource('tags','TagsController');
+
+Route::middleware(['auth'])->group(function (){
+    Route::resource('user','UserController');
+    Route::get('changeStatus', 'UserController@changeStatus');
+});
+
+
+
+
 

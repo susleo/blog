@@ -15,11 +15,31 @@ class UserTableSeeder extends Seeder
         //
         $user = \App\User::where('email','surajfromleo@gmail.com')->first();
         if(!$user){
-            \App\User::Create([
+             \App\User::Create([
                 'name'=>'Suraj SB',
-                'email'=>'suraffromleo@gmail.com',
-                'password'=>Hash::make('suraj88@')
+                'email'=>'surajfromleo@gmail.com',
+                'password'=>Hash::make('suraj88@@'),
+                 'role'=>'admin',
             ]);
+
         }
+        \App\User::Create([
+            'name'=>'Alex D ',
+            'email'=>'alex@alex.com',
+            'password'=>Hash::make('12345678')
+        ]);
+
+        \App\User::Create([
+            'name'=>'Jake Paul ',
+            'email'=>'jakepaul@gmail.com',
+            'password'=>Hash::make('12345678')
+        ]);
+
+        \App\User::Create([
+            'name'=>'Logan Paul',
+            'email'=>'loganpaul@gmail.com',
+            'password'=>Hash::make('12345678')
+        ]);
+
     }
 }

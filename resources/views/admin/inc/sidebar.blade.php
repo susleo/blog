@@ -2,24 +2,36 @@
     <div class="page-sidebar-inner">
         <div class="page-sidebar-profile">
             <div class="sidebar-profile-image">
-                <img src="{{asset('assets/images/avatars/avatar1.png')}}">
+                @if(auth()->user()->isAdmin())
+                    <img src="{{asset('assets/images/avatars/avatar4.jpg')}}" class="rounded-circle" >
+                @else
+                    <img src="{{asset('assets/images/avatars/avatar1.png')}}" class="rounded-circle">
+                @endif
+
             </div>
             <div class="sidebar-profile-info">
                 <a href="javascript:void(0);" class="account-settings-link">
-                    <p>Suraj Susloe</p>
-                    <span>suraj@susloe.com<i class="material-icons float-right">arrow_drop_down</i></span>
+                    <p>{{auth()->user()->name}}</p>
+                    <span>{{auth()->user()->email}}<i class="material-icons float-right">arrow_drop_down</i></span>
                 </a>
             </div>
         </div>
         <div class="page-sidebar-menu">
             <div class="page-sidebar-settings hidden">
                 <ul class="sidebar-menu list-unstyled">
-                    <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">inbox</i>Inbox</a></li>
-                    <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">star_border</i>Starred</a></li>
-                    <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">done</i>Sent Mail</a></li>
-                    <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">history</i>History</a></li>
+                    <li><a href="{{route('user.edit',auth()->user()->id)}}" class="waves-effect waves-grey"><i class="material-icons">edit</i>Edit Profile</a></li>
                     <li class="divider"></li>
-                    <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign Out</a></li>
+                    <li>
+
+                        <a href="{{route('logout')}}" class="waves-effect waves-grey"
+                               onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                            <i class="material-icons">logout</i>logout</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-accordion-menu">
@@ -30,6 +42,13 @@
                         </a>
                     </li>
 
+                    @if(auth()->user()->isAdmin())
+                    <li>
+                        <a href="{{route('user.index')}}" class="waves-effect waves-grey">
+                            <i class="material-icons">settings_input_svideo</i>Users
+                        </a>
+                    </li>
+                    @endif
 
                     <li>
                         <a href="{{route('post.index')}}" class="waves-effect waves-grey">

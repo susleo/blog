@@ -7,6 +7,7 @@ use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Post;
 use App\Tag;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -66,6 +67,7 @@ class PostController extends Controller
            'category_id'=>$request->category_id,
            'image'=>$image,
            'published_at'=>$request->published_at,
+           'user_id'=>Auth::user()->id,
        ];
 
        $post = Post::create($data);
@@ -75,7 +77,17 @@ class PostController extends Controller
        return redirect(route('post.index'));
 
     }
+    public function show(Post $post)
+    {
 
+        //
+        $categories = Category::all();
+        return view('admin.posts.show')
+            ->with('categories',$categories)
+            ->with('tags',Tag::all())
+            ->with('post',$post);
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -106,7 +118,7 @@ class PostController extends Controller
         //
 //        $data = $request->only(['title','description','published_at','content']);
 
-        $date = [
+        $data = [
             'title'=>$request->title,
             'description'=>$request->description,
             'contents'=>$request->contents,

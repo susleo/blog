@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="page-title">Categories</h2>
+                            <h2 class="page-title"> {{(route('categories.trashed')?'Trashed Categories':'Categories')}}</h2>
                         </div>
                     </div>
 
@@ -49,13 +49,16 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 
+
                     @if(!isset($category))
 
                     @if($categories->count() < 1)
-                        <h3> <br>No Categories Yet !!</h3>
+                       @if(request()->url()==route('categories.trashed'))
+                             <h3> <br> No Trashed Categories Yet !!</h3>
+                        @else
+                        <h3> <br>  No Categories Yet !!</h3>
+                            @endif
                     @else
-
-
                     <table class="table">
                         <thead>
                         <tr>
