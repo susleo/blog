@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::get('category/{category}', 'WelcomeController@category')->name('category');
+
+Route::get('tag/{tag}', 'WelcomeController@tag')->name('tag');
+
 
 Auth::routes();
 

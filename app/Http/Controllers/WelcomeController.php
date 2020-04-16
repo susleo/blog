@@ -28,5 +28,22 @@ class WelcomeController extends Controller
     }
 
 
+    public function category(Category $category){
+        $categories = Category::all();
+        return view('admin.categories.show')
+            ->with('categories',$categories)
+            ->with('category',$category)
+            ->with('posts',$category->posts()->paginate(9));
+    }
+
+    public function tag(Tag $tag){
+        $categories = Category::all();
+        return view('admin.tags.show')
+            ->with('categories',$categories)
+            ->with('tag',$tag)
+            ->with('posts',$tag->posts()->paginate(9));
+    }
+
+
 
 }
