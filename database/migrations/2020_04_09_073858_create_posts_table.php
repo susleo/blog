@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('contents');
             $table->integer('category_id');
             $table->integer('user_id');
+            $table->integer('views_count')->default(0);
             $table->timestamp('published_at');
             $table->softDeletes();
             $table->timestamps();

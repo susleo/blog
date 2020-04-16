@@ -81,11 +81,17 @@ class PostController extends Controller
     {
 
         //
+        $count = $post->views_count += 1;
+        $post->save([
+            'views_count' => $count
+        ]);
         $categories = Category::all();
+        $pop = Post::all()->sortBy('views_count')->take(3);
         return view('admin.posts.show')
             ->with('categories',$categories)
             ->with('tags',Tag::all())
-            ->with('post',$post);
+            ->with('post',$post)
+            ->with('popular_post',$pop);
 
     }
     /**

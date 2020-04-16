@@ -75,7 +75,17 @@
                         <span class="post-category text-white bg-success mb-3">{{$post->category->name}}</span>
                         <h1 class="mb-4"><a href="#">{{$post->title}}</a></h1>
                         <div class="post-meta align-items-center text-center">
-                            <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                            <figure class="author-figure mb-0 mr-3 d-inline-block">
+                                @if($post->user->image == 'blank')
+                                    @if($post->user->role == 'admin')
+                                        <img src="{{asset('assets/images/avatars/avatar4.jpg')}}" class="img-fluid">
+                                    @else
+                                        <img src="{{asset('assets/images/avatars/avatar3.png')}}" class="img-fluid">
+                                    @endif
+                                @else
+                                    <img src="{{asset('storage/'.$post->user->image)}}" class="img-fluid">
+                                @endif
+                            </figure>
                             <span class="d-inline-block mt-1">By {{$post->user->name}}</span>
                             <span>&nbsp;-&nbsp;   @php $date=date_create($post->published_at); @endphp
                                 {{date_format($date,"d/F/Y")}}</span>
@@ -167,39 +177,22 @@
                         <h3 class="heading">Popular Posts</h3>
                         <div class="post-entry-sidebar">
                             <ul>
+                                @foreach($popular_post as $pop)
                                 <li>
-                                    <a href="">
-                                        <img src="images/img_1.jpg" alt="Image placeholder" class="mr-4">
+                                    <a href="{{route('post.show',$pop->id)}}">
+                                        <img src="{{asset('storage/'.$pop->image)}}" alt="Image placeholder" class="mr-4">
                                         <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
+                                            <h4>{{$pop->title}}</h4>
                                             <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span>
+                                                <span class="mr-2">
+                                                @php $date=date_create($post->published_at); @endphp
+                                                    {{date_format($date,"d/F/Y")}}
+                                                </span>
                                             </div>
                                         </div>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="">
-                                        <img src="images/img_2.jpg" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <img src="images/img_3.jpg" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
