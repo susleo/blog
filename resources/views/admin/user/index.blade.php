@@ -8,6 +8,12 @@
                     <div class="row">
                         <div class="col-12">
                             <h2 class="page-title">User</h2>
+                            <div class="float-right">
+                            <a href="{{route('user.create')}}">
+                                <button type="button" class="btn btn-primary rounded-pill">Register New User</button>
+                            </a>
+                            </div>
+
                         </div>
                     </div>
 
@@ -87,6 +93,9 @@
                     @else
                         <h3>No Users Yet !!</h3>
                     @endif
+         <div class="pagination-circle">
+             {{$users->links()}}
+         </div>
 
                 </div>
             </div><!-- Page Content -->

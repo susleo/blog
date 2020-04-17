@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +24,39 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('admin.user.index')->with('users',User::all());
+
+        return view('admin.user.index')
+            ->with('users',User::paginate(10));
+    }
+
+    public function create()
+    {
+        //
+        return view('admin.user.edit');
+    }
+
+    public function store(CreateUserRequest $request, User $user)
+    {
+        //
+          $data=[
+              'name'=>$request->name,
+              'email'=>$request->email,
+              'password'=>$request->password,
+              'role'=>$request->role,
+              'about'=>$request->about,
+
+          ];
+          if($request->has('image')){
+              $image = $request->image->store('user');
+          }else{
+              $image='blank';
+          }
+          $data['image']=$image;
+
+          $user->create($data);
+
+          session()->flash('success','NEW USER HASBEEN CREATED');
+        return redirect(route('user.index'));
     }
 
 
@@ -33,7 +67,7 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         //
         $data = [
@@ -57,11 +91,14 @@ class UserController extends Controller
 
         if(auth()->user()->isAdmin()){
             $role = $request->role;
-            $password = $user->password;
-
         }else{
             $role = $user->role;
-            $password = Hash::make($request->password);
+        }
+
+        if(empty($request->password)){
+            $password = ($user->password);
+        }else{
+            $password = $request->password;
         }
            $data['image']=$image;
           $data['role' ]= $role;

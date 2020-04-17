@@ -19,7 +19,7 @@ Route::get('category/{category}', 'WelcomeController@category')->name('category'
 Route::get('tag/{tag}', 'WelcomeController@tag')->name('tag');
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -41,7 +41,6 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('user','UserController');
     Route::get('changeStatus', 'UserController@changeStatus');
 });
-
 
 
 

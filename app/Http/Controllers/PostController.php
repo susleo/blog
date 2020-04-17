@@ -28,7 +28,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        return view('admin.posts.index')->with('posts',Post::all());
+        return view('admin.posts.index')->with('posts',Post::paginate(10));
     }
 
     /**
@@ -93,11 +93,11 @@ class PostController extends Controller
             ->where('id', '!=', $post->id )
             ->take(1);
 //        dd($relatedWithCat);
-//        $tags3 = array();
+//        $tags = array();
 //        foreach ($post->tags as $tag) {
 //            $tags3[$tag->id] = $tag->name;
 //        }
-//        $relatedWithTag = Post::whereHas('tags', function ($query) use ($tags3) {
+//        $relatedWithTag = Post::whereHas('tags', function ($query) use ($tags) {
 //            $query->where('name', $tags3)
 //         ;
 //        })->where('id', '!=', $post->id )// So it won't fetch same post
@@ -110,7 +110,7 @@ class PostController extends Controller
         $relatedWithTag = Post::whereHas('tags', function ($q) use ($post) {
             return $q->whereIn('name', $post->tags->pluck('name'));
         })
-            ->where('id', '!=', $post->id) // So you won't fetch same post
+            ->where('id', '!=', $post->id) // So it won't fetch same post
             ->get()
             ->take(2);
 

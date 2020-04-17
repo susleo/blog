@@ -45,7 +45,7 @@
                     @if(auth()->user()->isAdmin())
                     <li>
                         <a href="{{route('user.index')}}" class="waves-effect waves-grey">
-                            <i class="material-icons">settings_input_svideo</i>Users
+                            <i class="material-icons">supervisor_account</i>Users
                         </a>
                     </li>
                     @endif

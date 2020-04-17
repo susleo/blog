@@ -86,6 +86,8 @@
                         <h3>No Post Yet !!</h3>
                     @endif
 
+
+                    {{$posts->links()}}
                 </div>
             </div><!-- Page Content -->
 
