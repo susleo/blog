@@ -25,7 +25,7 @@ class UpdateCategoriesRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|unique:categories'
+            'name'=>'required'
         ];
     }
 }

@@ -80,20 +80,52 @@ class PostController extends Controller
     public function show(Post $post)
     {
 
-        //
+        //page views Count
         $count = $post->views_count += 1;
         $post->save([
             'views_count' => $count
         ]);
+
+        //Related Post
+
+        $relatedWithCat = Post::all()
+            ->where('category_id',$post->category->id)
+            ->where('id', '!=', $post->id )
+            ->take(1);
+//        dd($relatedWithCat);
+//        $tags3 = array();
+//        foreach ($post->tags as $tag) {
+//            $tags3[$tag->id] = $tag->name;
+//        }
+//        $relatedWithTag = Post::whereHas('tags', function ($query) use ($tags3) {
+//            $query->where('name', $tags3)
+//         ;
+//        })->where('id', '!=', $post->id )// So it won't fetch same post
+//            ->get()->take(2);
+//         dd($relatedWithTag);
+
+
+        $post = Post::where('id', '=', $post->id)->first();
+
+        $relatedWithTag = Post::whereHas('tags', function ($q) use ($post) {
+            return $q->whereIn('name', $post->tags->pluck('name'));
+        })
+            ->where('id', '!=', $post->id) // So you won't fetch same post
+            ->get()
+            ->take(2);
+
         $categories = Category::all();
         $pop = Post::all()->sortBy('views_count')->take(3);
         return view('admin.posts.show')
             ->with('categories',$categories)
             ->with('tags',Tag::all())
             ->with('post',$post)
-            ->with('popular_post',$pop);
+            ->with('popular_post',$pop)
+            ->with('relatedWithCat',$relatedWithCat)
+            ->with('relatedWithTag',$relatedWithTag);
 
     }
+//
     /**
      * Show the form for editing the specified resource.
      *

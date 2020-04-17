@@ -41,6 +41,7 @@ class CategoriesController extends Controller
     {
         Category::create([
             'name'=>$request->name,
+            'description'=>$request->description,
         ]);
 
          session()->flash('success','Category Created SucessFully');
@@ -81,6 +82,7 @@ class CategoriesController extends Controller
     {
         //
            $category->name = $request->name;
+           $category->description = $request->description;
            $category->save();
            session()->flash('success','Motherfucker Category Update SucessFully');
            return redirect(route('categories.index'));

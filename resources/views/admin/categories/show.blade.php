@@ -7,8 +7,7 @@
                     <div class="col-md-6">
                         <span>Category</span>
                         <h3>{{ucfirst($category->name)}}</h3>
-{{--                        <p> {{ucfirst($category->description)}}</p>--}}
-                        <p>Some Text about caetgory will be awesome here!!</p>
+                        <p> {{ucfirst($category->description)}}</p>
                     </div>
                 </div>
             </div>

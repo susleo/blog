@@ -45,6 +45,10 @@
                             <label for="category">Category</label>
                             <input type="text" class="form-control" value="{{isset($category)?$category->name:''}}" name="name" aria-describedby="Category" placeholder="Enter Category">
                         </div>
+                        <div class="form-group">
+                            <label for="category">Description (optional)</label>
+                            <input type="text" class="form-control" value="{{isset($category)?$category->description:''}}" name="description" aria-describedby="description" placeholder="Enter description">
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
