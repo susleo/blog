@@ -8,11 +8,13 @@
                     <div class="row">
                         <div class="col-12">
                             <h2 class="page-title">User</h2>
+                            @if(auth()->user()->isAdmin())
                             <div class="float-right">
                             <a href="{{route('user.create')}}">
                                 <button type="button" class="btn btn-primary rounded-pill">Register New User</button>
                             </a>
                             </div>
+                                @endif
 
                         </div>
                     </div>
@@ -21,7 +23,7 @@
 
 
                     @if($users->count() > 0)
-                    <table class="table table-responsive-sm">
+                        <table id="example" class="table table-responsive-xl js-dataTable-full-pagination">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -35,6 +37,7 @@
                         </thead>
 
                         <tbody>
+                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
                         @php $i=1 @endphp
                         @foreach($users as $user)
                         <tr>
@@ -56,14 +59,26 @@
                             <td>{{$user->role}}</td>
                             <td>{{$user->posts->count()}}</td>
                             <td>
+                                @if(auth()->user()->isAdmin())
                                 <input data-id="{{$user->id}}" class="toggle-class"
                                        type="checkbox" data-onstyle="success" data-offstyle="danger"
                                        data-toggle="toggle" data-on="Active"
                                        data-off="InActive" {{ $user->status ? 'checked' : '' }}>
+                                    @else
+                                    @if($user->status=='0')
+                                       <h2><span class="badge badge-danger">In Active</span></h2>
+                                        @else
+                                        <h2><span class="badge badge-success">Active</span></h2>
+                                        @endif
+                                @endif
                             </td>
 
 
                             <td>
+                                <button type="button" class="btn btn-primary rounded-pill">
+                                    Show
+                                </button>
+                                @if(auth()->user()->isAdmin())
                                 <form action="{{route('user.destroy',$user->id)}}" method="post">
 
                                 <a href="{{route('user.edit',$user->id)}}">
@@ -78,6 +93,7 @@
                                     </button>
 
                                 </form>
+                                  @endif
                             <td>
                                @php $i++ @endphp
 

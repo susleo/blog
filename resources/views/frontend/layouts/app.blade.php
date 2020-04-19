@@ -4,6 +4,21 @@
 
 <body>
 <div class="site-wrap">
+    @if(session()->has('success'))
+        <h3>
+        <div class="badge badge-primary " role="alert">
+            {{session()->get('success')}}
+        </div>
+        </h3>
+    @endif
+
+            @if($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                            @foreach($errors->all() as $error)
+                                    {{$error}}
+                            @endforeach
+                    </div>
+            @endif
     @include('frontend.inc.header')
 @yield('body')
 

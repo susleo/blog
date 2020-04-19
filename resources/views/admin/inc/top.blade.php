@@ -19,12 +19,16 @@
     <link href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/font-awesome/css/all.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/waves/waves.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/nvd3/nv.d3.min.css')}}" rel="stylesheet">
+
 
 
     <!-- Theme Styles -->
     <link href="{{asset('assets/css/alpha.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">
 
+    <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/datatables/dataTables.bootstrap4.css')}}">
     @yield('css')
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

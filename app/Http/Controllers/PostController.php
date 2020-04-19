@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
+use App\Page_config;
 use App\Post;
+use App\site_details;
 use App\Tag;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +30,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        return view('admin.posts.index')->with('posts',Post::paginate(10));
+        return view('admin.posts.index')->with('posts',Post::latest()->paginate(10));
     }
 
     /**
@@ -86,6 +88,9 @@ class PostController extends Controller
             'views_count' => $count
         ]);
 
+
+        $about_intro = Page_config::all()->where('id','1');
+        $socail = site_details::all();
         //Related Post
 
         $relatedWithCat = Post::all()
@@ -120,6 +125,8 @@ class PostController extends Controller
             ->with('categories',$categories)
             ->with('tags',Tag::all())
             ->with('post',$post)
+            ->with('about_intro',$about_intro)
+            ->with('socail',$socail)
             ->with('popular_post',$pop)
             ->with('relatedWithCat',$relatedWithCat)
             ->with('relatedWithTag',$relatedWithTag);

@@ -1,10 +1,5 @@
 @extends('admin.layouts.app')
 
-@section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css" class="rel">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link href="{{asset('assets/plugins/select2/css/select2-material.css')}}" rel="stylesheet">
-@endsection
 
 @section('content')
 

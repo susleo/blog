@@ -109,7 +109,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix-core.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
     <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
-
+    <script>
+        $('trix-editor').css("min-height", "350px");
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
 

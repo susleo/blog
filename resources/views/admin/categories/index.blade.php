@@ -5,12 +5,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="page-title"> {{(route('categories.trashed')?'Trashed Categories':'Categories')}}</h2>
+                            <h2 class="page-title">Categoreis </h2>
                         </div>
                     </div>
 
 
                     <!-- Modal -->
+
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <form action="" method="post" id="deleteForm">
@@ -36,25 +37,6 @@
                     </div>
 
 
-                    <form action="{{isset($category)?route('categories.update',$category->id):route('categories.store')}}" method="post">
-                        @csrf
-                        @if(isset($category))
-                            @method("PUT")
-                            @endif
-                        <div class="form-group">
-                            <label for="category">Category</label>
-                            <input type="text" class="form-control" value="{{isset($category)?$category->name:''}}" name="name" aria-describedby="Category" placeholder="Enter Category">
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Description (optional)</label>
-                            <input type="text" class="form-control" value="{{isset($category)?$category->description:''}}" name="description" aria-describedby="description" placeholder="Enter description">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-
-
-                    @if(!isset($category))
 
                     @if($categories->count() < 1)
                        @if(request()->url()==route('categories.trashed'))
@@ -63,7 +45,7 @@
                         <h3> <br>  No Categories Yet !!</h3>
                             @endif
                     @else
-                    <table class="table">
+                     <table id="example" class="table table-responsive-xl js-dataTable-full-pagination">
                         <thead>
                         <tr>
 
@@ -103,7 +85,6 @@
 
                         </tbody>
                     </table>
-                    @endif
                     @endif
                 </div>
             </div><!-- Page Content -->

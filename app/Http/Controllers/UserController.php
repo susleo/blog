@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        return $this->middleware('verifyIsAdmin')->only(['index','destroy']);
+        return $this->middleware('verifyIsAdmin')->only(['destroy']);
     }
 
     public function index()

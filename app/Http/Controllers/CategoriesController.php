@@ -29,6 +29,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
+        return view('admin.categories.create');
     }
 
     /**
@@ -68,7 +69,7 @@ class CategoriesController extends Controller
     public function edit(Category $category)
     {
         //
-        return view('admin.categories.index')->with('category',$category);
+        return view('admin.categories.create')->with('category',$category);
     }
 
     /**

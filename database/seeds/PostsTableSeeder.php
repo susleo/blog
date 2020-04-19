@@ -13,16 +13,16 @@ class PostsTableSeeder extends Seeder
     {
         //
 
-        $category1 = \App\Category::Create(['name'=>'Travel',]);
-        $category2 = \App\Category::Create(['name'=>'Politics',]);
-        $category3 = \App\Category::Create(['name'=>'Tech',]);
+        $category1 = \App\Category::Create(['name'=>'News',]);
+        $category2 = \App\Category::Create(['name'=>'Tech',]);
+        $category3 = \App\Category::Create(['name'=>'Science',]);
+        $category4 = \App\Category::Create(['name'=>'Programming',]);
         $category4 = \App\Category::Create(['name'=>'Entertainment',]);
-        $category4 = \App\Category::Create(['name'=>'Sports',]);
 
 
 
         $post1 = \App\Post::Create([
-            'title'=>'The AI magically removes moving objects from videos',
+            'title'=>'This post belongs to News',
             'description'=>'default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).',
             'contents'=>' Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).',
             'category_id'=>$category1->id,

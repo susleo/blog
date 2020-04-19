@@ -58,6 +58,7 @@
             @endif
     @yield('content')
 
+
 </div><!-- App Container -->
 
 @include('admin.inc.footer')

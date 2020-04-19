@@ -42,13 +42,13 @@
                         </a>
                     </li>
 
-                    @if(auth()->user()->isAdmin())
+
                     <li>
                         <a href="{{route('user.index')}}" class="waves-effect waves-grey">
                             <i class="material-icons">supervisor_account</i>Users
                         </a>
                     </li>
-                    @endif
+
 
                     <li>
                         <a href="{{route('post.index')}}" class="waves-effect waves-grey">
@@ -63,10 +63,11 @@
 
                     <li>
                         <a href="{{route('categories.index')}}" class="waves-effect waves-grey">
-                            <i class="material-icons">grid_on</i>Categories
+                            <i class="material-icons">grid_on</i>Categories<i class="material-icons sub-arrow">keyboard_arrow_right</i>
                         </a>
                         <ul class="accordion-submenu list-unstyled">
                             <li><a href="{{route('categories.index')}}"> All Categories</a></li>
+                            <li><a href="{{route('categories.create')}}"> Create Category</a></li>
                             <li><a href="{{route('categories.trashed')}}">Trash</a></li>
                         </ul>
                     </li>
@@ -76,32 +77,29 @@
                             <i class="material-icons">tags</i>Tags
                         </a>
                     </li>
+
+
+
                     <li>
-                        <a href="charts.html" class="waves-effect waves-grey">
-                            <i class="material-icons">trending_up</i>Charts
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="waves-effect waves-grey">
-                            <i class="material-icons">tag_faces</i>Extra Pages<i class="material-icons sub-arrow">keyboard_arrow_right</i>
+                        <a href="{{route('post.index')}}" class="waves-effect waves-grey">
+                            <i class="material-icons">build</i>Site Configuration<i class="material-icons sub-arrow">keyboard_arrow_right</i>
                         </a>
                         <ul class="accordion-submenu list-unstyled">
-                            <li><a href="pages-404.html">404</a></li>
-                            <li><a href="pages-500.html">500</a></li>
-                            <li><a href="pages-sign-in.html">Sign In</a></li>
-                            <li><a href="pages-sign-up.html">Sign Up</a></li>
-                            <li><a href="pages-lock-screen.html">Lock Screen</a></li>
-                            <li><a href="pages-coming-soon.html">Coming Soon</a></li>
-                            <li><a href="pages-invoice.html">Invoice</a></li>
-                            <li><a href="pages-pricing-tables.html">Pricing Tables</a></li>
-                            <li><a href="pages-help-center.html">Help Center</a></li>
+                            <li><a href="{{route('page_config.index')}}"> Short Intro </a></li>
+                            <li><a href="{{route('about.index')}}"> Abouts Us </a></li>
+                            <li><a href="{{route('team.index')}}"> Our Team </a></li>
+                            <li><a href="{{route('contact.index')}}"> Contact Us </a></li>
+                            <li><a href="{{route('site_config')}}"> Site Configuration </a></li>
                         </ul>
                     </li>
+
+
+
                 </ul>
             </div>
         </div>
         <div class="sidebar-footer">
-            <p class="copyright">Stacks ©</p>
+            <p class="copyright">Stacks © Susleo</p>
             <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
         </div>
     </div>
